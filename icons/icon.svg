@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="NTトレーニングメニュー">
+  <rect width="512" height="512" rx="96" fill="#0b3a67"/>
+  <rect x="112" y="96" width="288" height="320" rx="24" fill="#ffffff"/>
+  <rect x="152" y="152" width="128" height="24" rx="12" fill="#0b3a67"/>
+  <rect x="152" y="212" width="208" height="20" rx="10" fill="#8fa6ba"/>
+  <rect x="152" y="264" width="208" height="20" rx="10" fill="#8fa6ba"/>
+  <rect x="152" y="316" width="144" height="20" rx="10" fill="#8fa6ba"/>
+  <circle cx="360" cy="360" r="72" fill="#b3261e"/>
+  <path d="M338 330 L392 360 L338 390 Z" fill="#ffffff"/>
+</svg>

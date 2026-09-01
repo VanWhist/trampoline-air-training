@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>トランポリン エアトレーニング</title>
+<meta name="description" content="全日本スキー連盟「フリースタイルスキー トランポリン エアトレーニング統一指導教程」を、技ごとに引けるようにしたアプリです。">
+<meta name="theme-color" content="#0b3a67">
+<meta name="color-scheme" content="light">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="トランポリン">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<link rel="stylesheet" href="./styles.css">
+<script src="./app.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">本文へ移動</a>
+
+<header class="app-header">
+  <div class="app-header__inner">
+    <div class="app-header__titles">
+      <p class="app-header__eyebrow">フリースタイルスキー</p>
+      <h1 class="app-header__title">トランポリン エアトレーニング</h1>
+    </div>
+    <div class="app-header__status">
+      <span class="net-badge net-badge--online" id="net-badge" role="status">
+        <span class="net-badge__dot" aria-hidden="true"></span><span id="net-badge-text">オンライン</span>
+      </span>
+      <p class="app-header__updated" id="data-updated">データ更新：読み込み中…</p>
+    </div>
+  </div>
+</header>
+
+<div id="notice-area" class="notice-area" aria-live="polite"></div>
+
+<main id="main" class="main" tabindex="-1">
+
+  <!-- ホーム（一覧） -->
+  <section id="view-home" class="view" aria-label="章の一覧">
+    <div class="search-block">
+      <div class="search-field">
+        <label class="search-field__label" for="search-input">技名・雪上の動きで検索</label>
+        <div class="search-field__row">
+          <input
+            id="search-input"
+            class="search-field__input"
+            type="search"
+            inputmode="search"
+            enterkeyhint="search"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            placeholder="例：キャット / 背落ち / バックフリップ">
+          <button type="button" id="search-clear" class="search-field__clear" hidden>消す</button>
+        </div>
+      </div>
+
+      <div class="chips" role="group" aria-label="カテゴリで絞り込み">
+        <button type="button" class="chip is-active" data-category="all" aria-pressed="true">すべて</button>
+        <button type="button" class="chip" data-category="基礎" aria-pressed="false">基礎</button>
+      </div>
+    </div>
+
+    <div id="home-body" class="home-body">
+      <p class="loading-note">教程を読み込んでいます…</p>
+    </div>
+  </section>
+
+  <!-- 練習詳細 -->
+  <section id="view-detail" class="view" aria-label="技の一覧" hidden></section>
+
+</main>
+
+<footer class="app-footer">
+  <p>出典：全日本スキー連盟「フリースタイルスキー トランポリン エアトレーニング統一指導教程」<br>本文は教程の記載をそのまま掲載しています。</p>
+  <p class="app-footer__small">技の一覧・解説・検索はオフラインでも使えます。実演動画の再生には通信が必要です。</p>
+</footer>
+
+<noscript>
+  <p style="padding:16px;font-size:16px;">
+    このアプリを使うにはJavaScriptを有効にしてください。
+  </p>
+</noscript>
+
+</body>
+</html>

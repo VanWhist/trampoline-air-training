@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>オフライン｜NTトレーニングメニュー</title>
+<meta name="theme-color" content="#0b3a67">
+<meta name="color-scheme" content="light">
+<style>
+  :root { color-scheme: light; }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: #f4f6f8;
+    color: #14181d;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+                 "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", Meiryo, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    font-weight: 500;
+  }
+  .box {
+    max-width: 420px;
+    background: #fff;
+    border: 2px solid #c9d2db;
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+  h1 { font-size: 20px; margin: 0 0 12px; }
+  p { margin: 0 0 12px; }
+  .note { font-size: 14px; color: #4a545f; }
+  button {
+    font: inherit;
+    font-weight: 700;
+    min-height: 48px;
+    padding: 0 22px;
+    margin-top: 8px;
+    border-radius: 8px;
+    border: 2px solid #072943;
+    background: #0b3a67;
+    color: #fff;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <div class="box">
+    <h1>オフラインです</h1>
+    <p>この端末には、まだメニューが保存されていません。</p>
+    <p class="note">
+      一度でも通信できる場所でこのアプリを開くと、次からはオフラインでもメニュー表と検索が使えるようになります。
+      （動画の再生は、オフラインではできません）
+    </p>
+    <button type="button" onclick="location.reload()">もう一度読み込む</button>
+  </div>
+</body>
+</html>

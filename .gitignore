@@ -1,0 +1,15 @@
+# このリポジトリは public です。個人情報・秘密情報を入れないこと。
+
+# 作業ツールの設定
+.claude/
+
+# 動画・画像の元素材（アップロード先はYouTube。リポジトリには置かない）
+*.mp4
+*.mov
+*.jpg
+*.jpeg
+
+# OS・エディタが作るファイル
+Thumbs.db
+desktop.ini
+.DS_Store

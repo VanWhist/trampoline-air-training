@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>開始秒つくるくん｜NTトレーニングメニュー（管理者用）</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<style>
+  :root {
+    --navy: #0b3a67;
+    --navy-dk: #072943;
+    --red: #b3261e;
+    --line: #c9d2db;
+    --line-soft: #e3e8ed;
+    --sub: #4a545f;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #f4f6f8;
+    color: #14181d;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+                 "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", Meiryo, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    font-weight: 500;
+  }
+  header {
+    background: var(--navy);
+    color: #fff;
+    padding: 12px 16px;
+  }
+  header h1 { font-size: 18px; margin: 0; }
+  header p { margin: 2px 0 0; font-size: 12px; opacity: .9; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 16px; }
+  .card {
+    background: #fff;
+    border: 2px solid var(--line);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+  h2 { font-size: 15px; margin: 0 0 10px; }
+  .hint { font-size: 13px; color: var(--sub); margin: 6px 0 0; }
+  label { font-weight: 700; font-size: 13px; }
+  button {
+    font: inherit; font-weight: 700; cursor: pointer;
+    min-height: 40px; padding: 0 14px;
+    border: 2px solid var(--line); border-radius: 8px;
+    background: #fff; color: var(--navy-dk);
+  }
+  button.primary { background: var(--navy); border-color: var(--navy-dk); color: #fff; }
+  button.danger  { background: #fff; border-color: var(--red); color: var(--red); }
+  button.big { min-height: 52px; font-size: 16px; padding: 0 20px; }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  input[type="text"], textarea {
+    font: inherit; width: 100%;
+    border: 2px solid var(--line); border-radius: 8px;
+    padding: 8px 10px; background: #fff; color: inherit;
+  }
+  textarea { min-height: 120px; resize: vertical; font-size: 14px; }
+  textarea.out { min-height: 150px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+  .row-flex { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .stage { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+  video {
+    width: 260px; max-width: 100%;
+    background: #000; border-radius: 10px; display: block;
+  }
+  .stage__side { flex: 1 1 320px; min-width: 260px; }
+  .clock {
+    font-variant-numeric: tabular-nums;
+    font-size: 30px; font-weight: 800; letter-spacing: .02em;
+  }
+  .clock small { font-size: 13px; font-weight: 600; color: var(--sub); display: block; }
+  .keys { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+  .keys th, .keys td { border: 1px solid var(--line-soft); padding: 4px 8px; text-align: left; }
+  .keys th { background: #f0f3f6; width: 130px; white-space: nowrap; }
+  kbd {
+    display: inline-block; border: 1px solid var(--line); border-bottom-width: 2px;
+    border-radius: 4px; padding: 0 5px; background: #f7f9fb; font-size: 12px;
+    font-family: inherit; font-weight: 700;
+  }
+  ol.rows { list-style: none; margin: 0; padding: 0; }
+  .r {
+    display: flex; align-items: center; gap: 10px;
+    border: 2px solid var(--line); border-radius: 10px;
+    padding: 8px 10px; margin-bottom: 8px; background: #fff;
+  }
+  .r.is-active { border-color: var(--red); border-width: 3px; background: #fff8f7; }
+  .r.is-done { background: #f6faf7; }
+  .r__no {
+    flex: none; width: 40px; min-height: 34px; padding: 0;
+    font-size: 13px; border-radius: 6px;
+  }
+  .r.is-active .r__no { background: var(--red); border-color: var(--red); color: #fff; }
+  .r__name { flex: 1 1 160px; min-width: 0; font-weight: 700; overflow-wrap: anywhere; }
+  .r__times { flex: none; font-variant-numeric: tabular-nums; font-size: 13px; text-align: right; min-width: 172px; }
+  .r__times .none { color: var(--sub); font-weight: 600; }
+  .r__times b { font-size: 14px; }
+  .r__acts { flex: none; display: flex; gap: 6px; }
+  .r__acts button { min-height: 34px; padding: 0 10px; font-size: 13px; }
+  .r__edit { flex: 1 1 100%; display: flex; gap: 6px; align-items: center; margin-top: 6px; }
+  .r__edit input { max-width: 160px; }
+  .alert {
+    border: 2px solid var(--red); background: #fdecea; color: #7a1a14;
+    border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; font-weight: 600;
+  }
+  .alert[hidden] { display: none; }
+  .ok { border-color: #1b6b3a; background: #eaf7ef; color: #14512b; }
+  .status { font-size: 13px; color: var(--sub); margin-top: 8px; min-height: 1.4em; }
+  .split { display: flex; gap: 14px; flex-wrap: wrap; }
+  .split > div { flex: 1 1 320px; min-width: 260px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>開始秒つくるくん（管理者用）</h1>
+  <p>NTトレーニングメニュー／このページはブラウザの中だけで動きます。動画も入力内容もどこにも送信されません。</p>
+</header>
+
+<div class="wrap">
+
+  <div class="alert" id="alert" hidden role="alert"></div>
+
+  <!-- 1. 動画 -->
+  <section class="card">
+    <h2>1. 動画を選ぶ（YouTubeにあげる前のローカルmp4でOK）</h2>
+    <div class="row-flex">
+      <input type="file" id="file" accept="video/*">
+      <span id="file-name" class="hint"></span>
+    </div>
+
+    <div class="stage" style="margin-top:12px;">
+      <video id="video" playsinline preload="metadata"></video>
+      <div class="stage__side">
+        <p class="clock"><span id="clock">00:00.00</span><small>現在の再生位置</small></p>
+
+        <div class="row-flex" style="margin-top:10px;">
+          <button type="button" id="btn-play" class="big" disabled>▶ 再生 / 停止</button>
+          <button type="button" id="btn-record" class="big primary" disabled>開始を記録（Space）</button>
+          <button type="button" id="btn-undo" class="big danger" disabled>取消（Backspace）</button>
+        </div>
+
+        <table class="keys">
+          <tr><th><kbd>Space</kbd></th><td>いまの対象種目に開始時間を記録して、次の種目へ</td></tr>
+          <tr><th><kbd>Enter</kbd></th><td>記録せずに次の種目へ</td></tr>
+          <tr><th><kbd>←</kbd> / <kbd>→</kbd></th><td>1秒 戻る / 進む</td></tr>
+          <tr><th><kbd>Shift</kbd>+<kbd>←</kbd>/<kbd>→</kbd></th><td>0.1秒 戻る / 進む</td></tr>
+          <tr><th><kbd>Backspace</kbd></th><td>直前の記録を取り消す</td></tr>
+          <tr><th><kbd>K</kbd></th><td>再生 / 一時停止</td></tr>
+        </table>
+        <p class="hint">※ 種目名の入力欄にカーソルがあるときは、Space を押しても記録されません。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 種目名 -->
+  <section class="card">
+    <h2>2. その日の種目名を貼り付ける（改行区切り・メニュー表と同じ順番）</h2>
+    <textarea id="names" placeholder="ステップ→キャッチドリル（PP/ハーキー/クイックツイスト/タックJ）
+紐飛び3種距離
+紐飛びナナメ
+紐飛び180
+前後ステップテンポジャンプ（PP/パラレルSQ）"></textarea>
+    <div class="row-flex" style="margin-top:8px;">
+      <button type="button" id="btn-load" class="primary">読み込み</button>
+      <button type="button" id="btn-reset">記録を全部消す</button>
+      <span class="hint" id="load-hint"></span>
+    </div>
+  </section>
+
+  <!-- 3. 記録 -->
+  <section class="card">
+    <h2>3. 記録する</h2>
+    <ol class="rows" id="rows"></ol>
+    <p class="status" id="status">種目名を読み込むと、ここに一覧が出ます。</p>
+  </section>
+
+  <!-- 4. 出力 -->
+  <section class="card">
+    <h2>4. 書き出す</h2>
+    <label style="display:flex;align-items:center;gap:8px;font-size:15px;">
+      <input type="checkbox" id="offset" style="width:20px;height:20px;">
+      0.5秒 手前に補正して出力する（構えから見えるようにする）
+    </label>
+    <p class="hint">
+      補正は<strong>書き出すときに1回だけ</strong>かかります。記録した時刻そのものは変わらないので、
+      ON / OFF を何度切り替えても二重に補正されることはありません。
+    </p>
+
+    <div class="split" style="margin-top:12px;">
+      <div>
+        <label for="out-main">① data/training-data.json 用（これをコピーして使う）</label>
+        <textarea id="out-main" class="out" readonly></textarea>
+        <div class="row-flex" style="margin-top:6px;">
+          <button type="button" id="btn-copy" class="primary">JSONをコピー</button>
+          <span class="hint" id="copy-hint"></span>
+        </div>
+      </div>
+      <div>
+        <label for="out-raw">② 作業の保存用（記録時刻つき・あとで読み戻せます）</label>
+        <textarea id="out-raw" class="out" readonly></textarea>
+        <div class="row-flex" style="margin-top:6px;">
+          <button type="button" id="btn-copy-raw">保存用をコピー</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 読み戻し -->
+  <section class="card">
+    <h2>5. 前に作ったものを読み戻して直す</h2>
+    <textarea id="import" placeholder="ここに ① か ② のJSONを貼り付けて「読み戻す」を押します"></textarea>
+    <div class="row-flex" style="margin-top:8px;">
+      <button type="button" id="btn-import">読み戻す</button>
+      <span class="hint" id="import-hint"></span>
+    </div>
+  </section>
+
+</div>
+
+<script>
+'use strict';
+(function () {
+
+  var OFFSET_SECONDS = 0.5;
+  var STORE_KEY = 'nt-timestamp-tool:draft';
+
+  var els = {
+    alert: document.getElementById('alert'),
+    file: document.getElementById('file'),
+    fileName: document.getElementById('file-name'),
+    video: document.getElementById('video'),
+    clock: document.getElementById('clock'),
+    btnPlay: document.getElementById('btn-play'),
+    btnRecord: document.getElementById('btn-record'),
+    btnUndo: document.getElementById('btn-undo'),
+    names: document.getElementById('names'),
+    btnLoad: document.getElementById('btn-load'),
+    btnReset: document.getElementById('btn-reset'),
+    loadHint: document.getElementById('load-hint'),
+    rows: document.getElementById('rows'),
+    status: document.getElementById('status'),
+    offset: document.getElementById('offset'),
+    outMain: document.getElementById('out-main'),
+    outRaw: document.getElementById('out-raw'),
+    btnCopy: document.getElementById('btn-copy'),
+    btnCopyRaw: document.getElementById('btn-copy-raw'),
+    copyHint: document.getElementById('copy-hint'),
+    importArea: document.getElementById('import'),
+    btnImport: document.getElementById('btn-import'),
+    importHint: document.getElementById('import-hint')
+  };
+
+  var rows = [];          // { name: string, rawStart: number|null }
+  var activeIndex = 0;
+  var history = [];       // 取消用 [{index, prevRaw, prevActive}]
+  var objectUrl = null;
+  var videoReady = false;
+  var editingIndex = -1;
+
+  /* ------------------------------------------------------------ 表示 */
+
+  function showAlert(text, isOk) {
+    els.alert.textContent = text;
+    els.alert.hidden = !text;
+    els.alert.classList.toggle('ok', !!isOk);
+  }
+
+  function fmt(sec) {
+    if (typeof sec !== 'number' || !isFinite(sec) || sec < 0) return '--:--.--';
+    var m = Math.floor(sec / 60);
+    var s = sec - m * 60;
+    var ss = s.toFixed(2);
+    if (s < 10) ss = '0' + ss;
+    return (m < 10 ? '0' + m : String(m)) + ':' + ss;
+  }
+
+  /** 「12.3」「0:12.3」「00:12.30」を秒に変換。だめなら null */
+  function parseTime(text) {
+    if (typeof text !== 'string') return null;
+    var t = text.trim();
+    if (!t) return null;
+    var m = /^(\d+):(\d{1,2}(?:\.\d+)?)$/.exec(t);
+    if (m) {
+      var sec = Number(m[1]) * 60 + Number(m[2]);
+      return isFinite(sec) && sec >= 0 ? sec : null;
+    }
+    if (/^\d+(\.\d+)?$/.test(t)) {
+      var v = Number(t);
+      return isFinite(v) && v >= 0 ? v : null;
+    }
+    return null;
+  }
+
+  /** 補正は出力時に1回だけ。0秒未満にはしない。 */
+  function getExportStart(rawStart, offsetEnabled) {
+    return Math.max(0, rawStart - (offsetEnabled ? OFFSET_SECONDS : 0));
+  }
+
+  function round1(v) { return Math.round(v * 10) / 10; }
+
+  /* ------------------------------------------------------- 動画の読み込み */
+
+  els.file.addEventListener('change', function () {
+    var file = els.file.files && els.file.files[0];
+    if (!file) return;
+    loadVideoFile(file);
+  });
+
+  function loadVideoFile(file) {
+    showAlert('');
+    videoReady = false;
+
+    // 前の動画を完全に止めてから Object URL を解放する
+    try { els.video.pause(); } catch (e) { /* noop */ }
+    els.video.removeAttribute('src');
+    try { els.video.load(); } catch (e) { /* noop */ }
+    if (objectUrl) { URL.revokeObjectURL(objectUrl); objectUrl = null; }
+
+    objectUrl = URL.createObjectURL(file);
+    els.video.src = objectUrl;
+    try { els.video.load(); } catch (e) { /* noop */ }
+
+    els.fileName.textContent = file.name;
+    updateButtons();
+  }
+
+  els.video.addEventListener('loadedmetadata', function () {
+    videoReady = true;
+    showAlert('');
+    updateButtons();
+    updateClock();
+  });
+
+  els.video.addEventListener('error', function () {
+    videoReady = false;
+    updateButtons();
+    showAlert('この動画形式はブラウザで再生できません。H.264/AAC の MP4 へ変換してください。');
+  });
+
+  window.addEventListener('beforeunload', function () {
+    if (objectUrl) URL.revokeObjectURL(objectUrl);
+  });
+
+  /* --------------------------------------------------------- 時計表示 */
+
+  function updateClock() {
+    els.clock.textContent = videoReady ? fmt(els.video.currentTime) : '00:00.00';
+  }
+
+  (function tick() {
+    updateClock();
+    window.requestAnimationFrame(tick);
+  })();
+
+  /* ------------------------------------------------------------ 操作 */
+
+  function isRecordMode() {
+    return videoReady && rows.length > 0 && activeIndex >= 0 && activeIndex < rows.length;
+  }
+
+  function togglePlay() {
+    if (!videoReady) return;
+    if (els.video.paused) {
+      var p = els.video.play();
+      if (p && typeof p.catch === 'function') {
+        p.catch(function () {
+          showAlert('再生を開始できませんでした。画面を一度クリックしてからもう一度お試しください。');
+        });
+      }
+    } else {
+      els.video.pause();
+    }
+  }
+
+  function nudge(delta) {
+    if (!videoReady) return;
+    var d = els.video.duration;
+    var t = els.video.currentTime + delta;
+    if (!isFinite(d) || d <= 0) d = Number.MAX_VALUE;
+    els.video.currentTime = Math.max(0, Math.min(d, t));
+  }
+
+  function recordCurrent() {
+    if (!isRecordMode()) return;
+    var i = activeIndex;
+    history.push({ index: i, prevRaw: rows[i].rawStart, prevActive: activeIndex });
+    rows[i].rawStart = els.video.currentTime;
+    activeIndex = Math.min(rows.length, i + 1);
+    renderRows();
+    saveDraft();
+  }
+
+  function undoRecord() {
+    var last = history.pop();
+    if (!last) return;
+    rows[last.index].rawStart = last.prevRaw;
+    activeIndex = last.prevActive;
+    renderRows();
+    saveDraft();
+  }
+
+  function skipNext() {
+    if (rows.length === 0) return;
+    activeIndex = Math.min(rows.length, activeIndex + 1);
+    renderRows();
+  }
+
+  els.btnPlay.addEventListener('click', togglePlay);
+  els.btnRecord.addEventListener('click', recordCurrent);
+  els.btnUndo.addEventListener('click', undoRecord);
+
+  /* ------------------------------------------------------ キーボード */
+
+  document.addEventListener('keydown', function (e) {
+    var t = e.target;
+    var tag = (t && t.tagName) ? t.tagName.toLowerCase() : '';
+    var inField = tag === 'input' || tag === 'textarea' || tag === 'select' ||
+                  (t && t.isContentEditable === true);
+    var onButton = tag === 'button';
+
+    // Space：入力欄・ボタンにフォーカスがあるときは何もしない
+    if (e.code === 'Space' || e.key === ' ' || e.key === 'Spacebar') {
+      if (inField || onButton) return;
+      if (e.repeat) { e.preventDefault(); return; }   // 長押しで連続記録しない
+      if (!isRecordMode()) return;                    // メタデータ読み込み前は記録しない
+      e.preventDefault();                             // 記録モード中だけスクロールを止める
+      recordCurrent();
+      return;
+    }
+
+    if (inField) return;
+
+    if (e.key === 'Enter') { e.preventDefault(); skipNext(); return; }
+
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); nudge(e.shiftKey ? -0.1 : -1); return; }
+    if (e.key === 'ArrowRight') { e.preventDefault(); nudge(e.shiftKey ?  0.1 :  1); return; }
+
+    if (e.key === 'Backspace') { e.preventDefault(); undoRecord(); return; }
+
+    if (e.key === 'k' || e.key === 'K') { e.preventDefault(); togglePlay(); return; }
+  });
+
+  /* -------------------------------------------------------- 種目リスト */
+
+  els.btnLoad.addEventListener('click', function () {
+    var names = els.names.value.split('\n')
+      .map(function (s) { return s.trim(); })
+      .filter(function (s) { return s !== ''; });
+
+    if (names.length === 0) {
+      els.loadHint.textContent = '種目名が1件も見つかりません。';
+      return;
+    }
+
+    // 既存の記録は、同じ位置・同じ名前なら引き継ぐ
+    var next = names.map(function (name, i) {
+      var keep = (rows[i] && rows[i].name === name) ? rows[i].rawStart : null;
+      return { name: name, rawStart: keep };
+    });
+
+    rows = next;
+    activeIndex = 0;
+    history = [];
+    editingIndex = -1;
+    els.loadHint.textContent = names.length + '種目を読み込みました。';
+    renderRows();
+    saveDraft();
+  });
+
+  els.btnReset.addEventListener('click', function () {
+    if (rows.length === 0) return;
+    rows.forEach(function (r) { r.rawStart = null; });
+    activeIndex = 0;
+    history = [];
+    renderRows();
+    saveDraft();
+  });
+
+  function renderRows() {
+    while (els.rows.firstChild) els.rows.removeChild(els.rows.firstChild);
+
+    rows.forEach(function (row, i) {
+      var li = document.createElement('li');
+      li.className = 'r' + (i === activeIndex ? ' is-active' : '') +
+                     (row.rawStart !== null ? ' is-done' : '');
+
+      var no = document.createElement('button');
+      no.type = 'button';
+      no.className = 'r__no';
+      no.textContent = (i === activeIndex ? '▶' : '') + (i + 1);
+      no.title = 'この種目を対象にする';
+      no.addEventListener('click', function () { activeIndex = i; renderRows(); });
+      li.appendChild(no);
+
+      var name = document.createElement('span');
+      name.className = 'r__name';
+      name.textContent = row.name;
+      li.appendChild(name);
+
+      var times = document.createElement('span');
+      times.className = 'r__times';
+      if (row.rawStart === null) {
+        var none = document.createElement('span');
+        none.className = 'none';
+        none.textContent = '未記録';
+        times.appendChild(none);
+      } else {
+        var exp = round1(getExportStart(row.rawStart, els.offset.checked));
+        var b = document.createElement('b');
+        b.textContent = '記録 ' + fmt(row.rawStart) + ' → 出力 ' + fmt(exp);
+        times.appendChild(b);
+      }
+      li.appendChild(times);
+
+      var acts = document.createElement('span');
+      acts.className = 'r__acts';
+
+      var playBtn = document.createElement('button');
+      playBtn.type = 'button';
+      playBtn.textContent = '再生';
+      playBtn.disabled = !videoReady || row.rawStart === null;
+      playBtn.addEventListener('click', function () {
+        if (!videoReady || row.rawStart === null) return;
+        els.video.currentTime = getExportStart(row.rawStart, els.offset.checked);
+        var p = els.video.play();
+        if (p && typeof p.catch === 'function') p.catch(function () { /* noop */ });
+      });
+      acts.appendChild(playBtn);
+
+      var editBtn = document.createElement('button');
+      editBtn.type = 'button';
+      editBtn.textContent = '修正';
+      editBtn.addEventListener('click', function () {
+        editingIndex = (editingIndex === i) ? -1 : i;
+        renderRows();
+      });
+      acts.appendChild(editBtn);
+
+      li.appendChild(acts);
+
+      if (editingIndex === i) {
+        var edit = document.createElement('span');
+        edit.className = 'r__edit';
+
+        var label = document.createElement('span');
+        label.className = 'hint';
+        label.textContent = '記録時刻（秒 または 0:12.3）：';
+        edit.appendChild(label);
+
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.value = row.rawStart === null ? '' : String(round1(row.rawStart));
+        input.setAttribute('inputmode', 'decimal');
+        edit.appendChild(input);
+
+        var save = document.createElement('button');
+        save.type = 'button';
+        save.className = 'primary';
+        save.textContent = '保存';
+        save.addEventListener('click', function () {
+          var v = parseTime(input.value);
+          if (v === null && input.value.trim() !== '') {
+            showAlert('時間の形式が読み取れません。「12.3」または「0:12.3」の形で入力してください。');
+            return;
+          }
+          history.push({ index: i, prevRaw: row.rawStart, prevActive: activeIndex });
+          row.rawStart = (input.value.trim() === '') ? null : v;
+          editingIndex = -1;
+          showAlert('');
+          renderRows();
+          saveDraft();
+        });
+        edit.appendChild(save);
+
+        var nowBtn = document.createElement('button');
+        nowBtn.type = 'button';
+        nowBtn.textContent = 'いまの位置を入れる';
+        nowBtn.disabled = !videoReady;
+        nowBtn.addEventListener('click', function () {
+          input.value = String(round1(els.video.currentTime));
+        });
+        edit.appendChild(nowBtn);
+
+        var cancel = document.createElement('button');
+        cancel.type = 'button';
+        cancel.textContent = 'やめる';
+        cancel.addEventListener('click', function () { editingIndex = -1; renderRows(); });
+        edit.appendChild(cancel);
+
+        li.appendChild(edit);
+      }
+
+      els.rows.appendChild(li);
+    });
+
+    var done = rows.filter(function (r) { return r.rawStart !== null; }).length;
+    if (rows.length === 0) {
+      els.status.textContent = '種目名を読み込むと、ここに一覧が出ます。';
+    } else if (activeIndex >= rows.length) {
+      els.status.textContent = '全' + rows.length + '種目のうち ' + done + '種目を記録しました。すべて記録済みです。';
+    } else {
+      els.status.textContent = '全' + rows.length + '種目のうち ' + done + '種目を記録しました。' +
+        'いまの対象：' + (activeIndex + 1) + '「' + rows[activeIndex].name + '」';
+    }
+
+    updateButtons();
+    renderOutput();
+  }
+
+  function updateButtons() {
+    els.btnPlay.disabled = !videoReady;
+    els.btnRecord.disabled = !isRecordMode();
+    els.btnUndo.disabled = history.length === 0;
+  }
+
+  /* ------------------------------------------------------------ 出力 */
+
+  els.offset.addEventListener('change', function () { renderRows(); });
+
+  function renderOutput() {
+    var offsetOn = els.offset.checked;
+
+    var main = rows.map(function (row, i) {
+      return {
+        no: i + 1,
+        name: row.name,
+        start: row.rawStart === null ? null : round1(getExportStart(row.rawStart, offsetOn))
+      };
+    });
+
+    var raw = {
+      tool: 'nt-timestamp-tool',
+      offsetApplied: offsetOn ? OFFSET_SECONDS : 0,
+      exercises: rows.map(function (row, i) {
+        return {
+          no: i + 1,
+          name: row.name,
+          rawStart: row.rawStart === null ? null : round1(row.rawStart),
+          start: row.rawStart === null ? null : round1(getExportStart(row.rawStart, offsetOn))
+        };
+      })
+    };
+
+    els.outMain.value = rows.length ? JSON.stringify(main, null, 2) : '';
+    els.outRaw.value = rows.length ? JSON.stringify(raw, null, 2) : '';
+  }
+
+  function copyText(text, hintEl) {
+    if (!text) { hintEl.textContent = 'コピーする内容がありません。'; return; }
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      hintEl.textContent = ok ? 'コピーしました。' : '自動コピーできませんでした。手で選択してコピーしてください。';
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        hintEl.textContent = 'コピーしました。';
+      }).catch(fallback);
+    } else {
+      fallback();
+    }
+  }
+
+  els.btnCopy.addEventListener('click', function () { copyText(els.outMain.value, els.copyHint); });
+  els.btnCopyRaw.addEventListener('click', function () { copyText(els.outRaw.value, els.copyHint); });
+
+  /* ---------------------------------------------------------- 読み戻し */
+
+  els.btnImport.addEventListener('click', function () {
+    var text = els.importArea.value.trim();
+    if (!text) { els.importHint.textContent = 'JSONを貼り付けてください。'; return; }
+
+    var data;
+    try { data = JSON.parse(text); }
+    catch (err) {
+      els.importHint.textContent = 'JSONとして読めません。かっこやカンマを確認してください。';
+      return;
+    }
+
+    var list = Array.isArray(data) ? data
+      : (data && Array.isArray(data.exercises) ? data.exercises : null);
+    if (!list) { els.importHint.textContent = 'exercises の配列が見つかりません。'; return; }
+
+    var usedRaw = false;
+    var next = [];
+    list.forEach(function (item, i) {
+      if (!item || typeof item !== 'object') return;
+      var name = typeof item.name === 'string' ? item.name : ('種目' + (i + 1));
+      var value = null;
+      if (typeof item.rawStart === 'number' && isFinite(item.rawStart) && item.rawStart >= 0) {
+        value = item.rawStart;         // 記録時刻がそのまま残っている＝二重補正の心配なし
+        usedRaw = true;
+      } else if (typeof item.start === 'number' && isFinite(item.start) && item.start >= 0) {
+        value = item.start;
+      }
+      next.push({ name: name, rawStart: value });
+    });
+
+    if (next.length === 0) { els.importHint.textContent = '読み込める種目がありませんでした。'; return; }
+
+    rows = next;
+    activeIndex = 0;
+    history = [];
+    editingIndex = -1;
+    els.names.value = rows.map(function (r) { return r.name; }).join('\n');
+
+    if (!usedRaw) {
+      // 補正後の値しかない → もう一度補正すると二重になるので、必ずOFFにして読み込む
+      els.offset.checked = false;
+      els.importHint.textContent = next.length + '種目を読み戻しました。' +
+        '（補正後の値として読み込んだため、二重補正を防ぐために補正チェックはOFFにしました）';
+    } else {
+      els.offset.checked = (data && Number(data.offsetApplied) > 0);
+      els.importHint.textContent = next.length + '種目を読み戻しました。記録時刻はそのままです。';
+    }
+
+    renderRows();
+    saveDraft();
+  });
+
+  /* ------------------------------------------------------ 下書きの保存 */
+
+  function saveDraft() {
+    try {
+      window.localStorage.setItem(STORE_KEY, JSON.stringify({
+        rows: rows, offset: els.offset.checked
+      }));
+    } catch (e) { /* 保存できなくても動作に影響なし */ }
+  }
+
+  function loadDraft() {
+    try {
+      var text = window.localStorage.getItem(STORE_KEY);
+      if (!text) return;
+      var data = JSON.parse(text);
+      if (!data || !Array.isArray(data.rows) || data.rows.length === 0) return;
+      rows = data.rows.map(function (r) {
+        return {
+          name: typeof r.name === 'string' ? r.name : '',
+          rawStart: (typeof r.rawStart === 'number' && isFinite(r.rawStart) && r.rawStart >= 0)
+            ? r.rawStart : null
+        };
+      }).filter(function (r) { return r.name !== ''; });
+      els.offset.checked = !!data.offset;
+      els.names.value = rows.map(function (r) { return r.name; }).join('\n');
+      els.loadHint.textContent = '前回の作業内容を復元しました。';
+    } catch (e) { /* noop */ }
+  }
+
+  /* ------------------------------------------------------------ 起動 */
+
+  loadDraft();
+  renderRows();
+
+})();
+</script>
+</body>
+</html>
