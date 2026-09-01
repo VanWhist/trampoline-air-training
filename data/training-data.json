@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T15:10:00+09:00",
-  "source": "全日本スキー連盟「フリースタイルスキー トランポリン エアトレーニング統一指導教程」02_トランポリン基礎 / 04_トランポリン中級",
+  "updatedAt": "2026-09-01T15:40:00+09:00",
+  "source": "全日本スキー連盟「フリースタイルスキー トランポリン エアトレーニング統一指導教程」02_トランポリン基礎 / 04_トランポリン中級 / 05_トランポリン応用",
   "sessions": [
     {
       "id": "tramp-basic",
@@ -1024,6 +1024,253 @@
           "end": null,
           "howto": "背筋を使って胸を起こすと同時に、膝を曲げて胸に近づけます。",
           "caution": "回転スピードを調整します。頭を早く返さないようにしましょう。",
+          "safety": "",
+          "link": "",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "tramp-advanced",
+      "date": "2019-07-27",
+      "title": "トランポリン応用",
+      "category": "応用",
+      "youtubeId": null,
+      "duration": 85.97,
+      "exercises": [
+        {
+          "id": "ta-01",
+          "no": 1,
+          "group": "バラニーアウト",
+          "name": "バラニーアウト",
+          "detail": "",
+          "prescription": "",
+          "aliases": [
+            "barani out"
+          ],
+          "start": null,
+          "end": null,
+          "howto": "1回目の宙返りと2回目の宙返りを区切って確認をし、流れて入らないようにします。",
+          "caution": "",
+          "safety": "",
+          "link": "",
+          "notes": ""
+        },
+        {
+          "id": "ta-02",
+          "no": 2,
+          "group": "バラニーアウト",
+          "name": "前方1・3/4背落ち",
+          "detail": "バラニーアウトの段階練習",
+          "prescription": "",
+          "aliases": [
+            "段階練習"
+          ],
+          "start": null,
+          "end": null,
+          "howto": "1回目から3/4に行くところで身体を開き、回転を止め、ベッドを確認します。上半身は上方向に開き、足先など下半身は回転方向に回すように意識しましょう。",
+          "caution": "",
+          "safety": "",
+          "link": "",
+          "notes": ""
+        },
+        {
+          "id": "ta-03",
+          "no": 3,
+          "group": "ダブルタック",
+          "name": "ダブルタック",
+          "detail": "",
+          "prescription": "",
+          "aliases": [
+            "double tuck",
+            "二回宙返り"
+          ],
+          "start": null,
+          "end": null,
+          "howto": "肩を倒さず、上に引き上げながら、腰・膝を前に出すようなイメージで膝をひきつけて回ります。",
+          "caution": "",
+          "safety": "",
+          "link": "",
+          "notes": ""
+        },
+        {
+          "id": "ta-04",
+          "no": 4,
+          "group": "ダブルタック",
+          "name": "タック1/4背落ち",
+          "detail": "ダブルタックの段階練習",
+          "prescription": "",
+          "aliases": [
+            "段階練習"
+          ],
+          "start": null,
+          "end": null,
+          "howto": "肩を倒さず、お腹が出ないように、上に引き上げながら、腰・膝を少し前にだすようなイメージで膝をひきつけて、抱えます。",
+          "caution": "",
+          "safety": "",
+          "link": "",
+          "notes": ""
+        },
+        {
+          "id": "ta-05",
+          "no": 5,
+          "group": "フロントフルインバラニー",
+          "name": "フロントフルインバラニー",
+          "detail": "",
+          "prescription": "",
+          "aliases": [
+            "front full in barani"
+          ],
+          "start": null,
+          "end": null,
+          "howto": "1回目の、1回捻り宙返りと、2回目の1/2捻り宙返りは、区切りをつけて確認をしましょう。",
+          "caution": "",
+          "safety": "",
+          "link": "",
+          "notes": ""
+        },
+        {
+          "id": "ta-06",
+          "no": 6,
+          "group": "フロントフルインバラニー",
+          "name": "フロントフル→立つ→バラニー",
+          "detail": "フロントフルインバラニーの段階練習",
+          "prescription": "",
+          "aliases": [
+            "段階練習"
+          ],
+          "start": null,
+          "end": null,
+          "howto": "フロントフルで立ち、すぐにバラニーをしてフロントフルインバラニーの流れのイメージを身に付けます。",
+          "caution": "",
+          "safety": "",
+          "link": "",
+          "notes": ""
+        },
+        {
+          "id": "ta-07",
+          "no": 7,
+          "group": "フロントフルインバラニー",
+          "name": "フロントフル→3/4背落ち",
+          "detail": "フロントフルインバラニーの段階練習",
+          "prescription": "",
+          "aliases": [
+            "段階練習"
+          ],
+          "start": null,
+          "end": null,
+          "howto": "1回目の宙返りが終わったところでベッドを確認してから、2回目の宙返りをします。",
+          "caution": "",
+          "safety": "",
+          "link": "",
+          "notes": ""
+        },
+        {
+          "id": "ta-08",
+          "no": 8,
+          "group": "フルフル",
+          "name": "フルフル（タック）",
+          "detail": "",
+          "prescription": "",
+          "aliases": [
+            "full full"
+          ],
+          "start": null,
+          "end": null,
+          "howto": "1回目の宙返りで1と1/2捻って、2回目の宙返りでバラニーをします。1回目の宙返りと2回目の宙返りに区切りをつけましょう。",
+          "caution": "",
+          "safety": "",
+          "link": "",
+          "notes": ""
+        },
+        {
+          "id": "ta-09",
+          "no": 9,
+          "group": "フルフル",
+          "name": "バック540",
+          "detail": "フルフルの段階練習",
+          "prescription": "",
+          "aliases": [
+            "段階練習"
+          ],
+          "start": null,
+          "end": null,
+          "howto": "1と1/2捻って、1回目の宙返りの入りの感覚をつかみましょう。段階練習としては、1回目の宙返りの1と1/2捻りを実施します。",
+          "caution": "",
+          "safety": "",
+          "link": "",
+          "notes": ""
+        },
+        {
+          "id": "ta-10",
+          "no": 10,
+          "group": "フルフル",
+          "name": "フル1/2捻り3/4背落ち",
+          "detail": "フルフルの段階練習",
+          "prescription": "",
+          "aliases": [
+            "段階練習"
+          ],
+          "start": null,
+          "end": null,
+          "howto": "",
+          "caution": "",
+          "safety": "",
+          "link": "",
+          "notes": "教程のこのページの本文が、別の章（トランポリン基礎の連続技）の記述になっているため空欄にしてある。原本の確認が必要。"
+        },
+        {
+          "id": "ta-11",
+          "no": 11,
+          "group": "フルフル",
+          "name": "フルフル（レイアウト）",
+          "detail": "",
+          "prescription": "",
+          "aliases": [
+            "full full"
+          ],
+          "start": null,
+          "end": null,
+          "howto": "1回目の宙返りで1と1/2捻って、2回目の宙返りでバラニーをします。1回目の宙返りと2回目の宙返りに区切りをつけましょう。",
+          "caution": "",
+          "safety": "",
+          "link": "",
+          "notes": ""
+        },
+        {
+          "id": "ta-12",
+          "no": 12,
+          "group": "ミラー",
+          "name": "ミラー（レイアウト）",
+          "detail": "",
+          "prescription": "",
+          "aliases": [
+            "miller",
+            "ミラー"
+          ],
+          "start": null,
+          "end": null,
+          "howto": "1回半捻ったところで確認をし、1回半と1回半に区切って実施します。またフルフルの2回目の宙返りで身体を締めて捻りの回転を上げます。",
+          "caution": "",
+          "safety": "",
+          "link": "",
+          "notes": ""
+        },
+        {
+          "id": "ta-13",
+          "no": 13,
+          "group": "ツイスト",
+          "name": "ツイストの練習",
+          "detail": "",
+          "prescription": "",
+          "aliases": [
+            "ツイスト",
+            "twist"
+          ],
+          "start": 0.0,
+          "end": null,
+          "howto": "技の終わりをまっすぐにし、次の技に入るときもまっすぐ上に宙返りをかけます。捻り急がず、縦回転をつけてから捻り始めるようにしましょう。",
+          "caution": "",
           "safety": "",
           "link": "",
           "notes": ""
