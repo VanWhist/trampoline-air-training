@@ -13,7 +13,7 @@
   var SUPPORTED_SCHEMA_VERSION = 1;
   var DATA_URL = './data/training-data.json';
   var LAST_GOOD_KEY = 'tramp-training:last-good-data';
-  var VALID_CATEGORIES = ['基礎', '連続技', '中級', '種目共通', 'モーグル'];
+  var VALID_CATEGORIES = ['基礎', '連続技', '中級', '応用', 'マット運動', '種目共通', 'モーグル'];
 
   var MSG_OFFLINE_VIDEO =
     '動画の再生にはインターネット接続が必要です。技の一覧と解説はオフラインでも確認できます。';
@@ -971,15 +971,15 @@
 
     if (hits.length === 0) {
       body.appendChild(el('div', { class: 'empty-state' }, [
-        el('strong', { text: '「' + state.query.trim() + '」に一致する種目はありません' }),
-        el('p', { text: '種目名の一部だけで検索できます。カテゴリの絞り込みも確認してください。' })
+        el('strong', { text: '「' + state.query.trim() + '」に一致する技はありません' }),
+        el('p', { text: '技名の一部だけでも検索できます。「バックフリップ」「ティルト」など雪上の動きからも引けます。' })
       ]));
       return;
     }
 
     body.appendChild(el('p', {
       class: 'result-count',
-      text: '検索結果 ' + hits.length + '件（種目名で検索）'
+      text: '検索結果 ' + hits.length + '件'
     }));
 
     var ul = el('ul', { class: 'result-list' });
@@ -995,10 +995,10 @@
         onclick: function () { openSession(session.id, ex.id, false); }
       }, [
         el('span', { class: 'result-item__name', text: ex.displayName }),
-        el('span', { class: 'result-item__pres', text: ex.detail || ex.link || '' }),
+        ex.link ? el('span', { class: 'result-item__pres', text: ex.link }) : null,
         el('span', { class: 'result-item__meta' }, [
           categoryBadge(session.category),
-          el('span', { text: session.dateLabel }),
+          el('span', { text: session.title }),
           ex.group ? el('span', { text: ex.group }) : null
         ])
       ]);
