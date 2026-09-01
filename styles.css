@@ -662,7 +662,9 @@ a { color: var(--c-brand); }
 }
 
 .exercise__main {
-  flex: 1 1 auto;
+  /* flex-basis を 0 にしないと、技名や回数が長いときに
+     再生ボタンが次の行へ押し出される（解説パネルの折り返しは維持する） */
+  flex: 1 1 0;
   min-width: 0;
   min-height: 56px;
   display: flex;
