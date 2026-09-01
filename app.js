@@ -1209,8 +1209,6 @@
 
       var li = el('li', { class: 'exercise', 'data-exercise-id': ex.id, id: 'ex-' + ex.id }, [main]);
 
-      li.appendChild(buildExerciseDoc(ex));
-
       if (canSeek) {
         li.appendChild(el('button', {
           type: 'button',
@@ -1224,6 +1222,7 @@
         ]));
       }
 
+      li.appendChild(buildExerciseDoc(ex));
       ul.appendChild(li);
     });
 
